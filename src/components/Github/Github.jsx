@@ -1,31 +1,33 @@
 import React, { useEffect, useState } from "react";
+import { useLoaderData } from "react-router-dom";
 
 const Github = () => {
-  const [data, setData] = useState(null);
+  const data = useLoaderData();
+  //   const [data, setData] = useState(null);
 
-  useEffect(() => {
-    fetch("https://api.github.com/users/asifkhan0")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setData(data);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, []);
+  //   useEffect(() => {
+  //     fetch("https://api.github.com/users/asifkhan0")
+  //       .then((response) => {
+  //         if (!response.ok) {
+  //           throw new Error("Network response was not ok");
+  //         }
+  //         return response.json();
+  //       })
+  //       .then((data) => {
+  //         setData(data);
+  //       })
+  //       .catch((error) => {
+  //         console.error("Error fetching data:", error);
+  //       });
+  //   }, []);
 
-  if (!data) {
-    return (
-      <div className="text-center m-4 bg-green-600 text-white p-4 text-3xl">
-        Loading...
-      </div>
-    );
-  }
+  //   if (!data) {
+  //     return (
+  //       <div className="text-center m-4 bg-green-600 text-white p-4 text-3xl">
+  //         Loading...
+  //       </div>
+  //     );
+  //   }
 
   return (
     <div className="text-center m-4 bg-green-600 text-white p-4 text-3xl">
@@ -36,3 +38,8 @@ const Github = () => {
 };
 
 export default Github;
+
+export const githubInfoLoader = async () => {
+  const responce = await fetch("https://api.github.com/users/asifkhan0");
+  return responce.json();
+};
